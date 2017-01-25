@@ -3,6 +3,23 @@
 require_once 'killfintrxn.civix.php';
 
 /**
+ * Implements hook_civicrm_post().
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_post
+ *
+ * @param string $op
+ * @param string $objectName
+ * @param int $objectId
+ * @param object $objectRef
+ */
+function killfintrxn_civicrm_post($op, $objectName, $objectId, &$objectRef) {
+  // process financial item
+  if ($objectName == "FinancialItem") {
+    CRM_Killfintrxn_FinancialItem::post($op, $objectName, $objectId, $objectRef);
+  }
+}
+
+/**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
