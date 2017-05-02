@@ -14,8 +14,8 @@ require_once 'killfintrxn.civix.php';
  */
 function killfintrxn_civicrm_post($op, $objectName, $objectId, &$objectRef) {
   // process financial item
-  if ($objectName == "FinancialItem") {
-    CRM_Killfintrxn_FinancialItem::post($op, $objectName, $objectId, $objectRef);
+  if ($objectName == "FinancialItem" || $objectName == "Contribution") {
+    CRM_Killfintrxn_FinancialTrxn::post($op, $objectName, $objectId, $objectRef);
   }
 }
 
