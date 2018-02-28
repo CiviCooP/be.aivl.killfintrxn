@@ -63,7 +63,8 @@ class CRM_Killfintrxn_FinancialTrxn {
         civicrm_api3('FinancialTrxn', 'delete', array(
           'id' => $financialTrxnId,
         ));
-      } catch (CiviCRM_API3_Exception $ex) {
+      }
+      catch (CiviCRM_API3_Exception $ex) {
       }
     }
   }
@@ -79,7 +80,7 @@ class CRM_Killfintrxn_FinancialTrxn {
       $financialTrxnId = civicrm_api3('EntityFinancialTrxn', 'getvalue', array(
         'entity_table' => 'civicrm_financial_item',
         'entity_id' => $contributionId,
-        'return' => 'financial_trxn_id'
+        'return' => 'financial_trxn_id',
       ));
       // now first delete the entity_financial_trxn, then the financial_trxn and finally the financial_item
       $sqlEntity = 'DELETE FROM civicrm_entity_financial_trxn WHERE financial_trxn_id = %1';
@@ -87,6 +88,8 @@ class CRM_Killfintrxn_FinancialTrxn {
       civicrm_api3('FinancialTrxn', 'delete', array('id' => $financialTrxnId));
       $sqlFinItem = 'DELETE FROM civicrm_financial_item WHERE id = %1';
       CRM_Core_DAO::executeQuery($sqlFinItem, array(1 => array($contributionId, 'Integer')));
-    } catch (CiviCRM_API3_Exception $ex) {}
+    }
+    catch (CiviCRM_API3_Exception $ex) {}
   }
+
 }

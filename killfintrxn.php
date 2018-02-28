@@ -7,10 +7,6 @@ require_once 'killfintrxn.civix.php';
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_post
  *
- * @param string $op
- * @param string $objectName
- * @param int $objectId
- * @param object $objectRef
  */
 function killfintrxn_civicrm_post($op, $objectName, $objectId, &$objectRef) {
   // process financial item
