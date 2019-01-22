@@ -24,12 +24,16 @@ class CRM_Killfintrxn_FinancialTrxn {
     // in case of Contribution and edit (balancing transactions created) remove entity_financial_trxn and
     // financial_trxn that were not created by fintrxn extension
     if ($objectName == "Contribution" && $op == "edit") {
-      self::deleteContributionTrxn($objectId);
+      $callBackParams = ['contribution_id' => $objectId];
+      CRM_Core_Transaction::addCallback(CRM_Core_Transaction::PHASE_POST_COMMIT,
+        'CRM_Killfintrxn_FinancialTrxn::deleteContributionTrxn', $callBackParams);
     }
 
     // in case of FinancialItem and create (new stuff) remove financial items, entity_financial_trxn and financial_trxn
     if ($objectName == "FinancialItem" && $op == "create") {
-      self::deleteFinancialItemTrxn($objectId);
+      $callBackParams = ['financial_item_id' => $objectId];
+      CRM_Core_Transaction::addCallback(CRM_Core_Transaction::PHASE_POST_COMMIT,
+        'CRM_Killfintrxn_FinancialTrxn::deleteFinancialItemTrxn', $callBackParams);
     }
   }
 
